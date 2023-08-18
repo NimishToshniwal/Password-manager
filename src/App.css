@@ -84,3 +84,23 @@
 .password-display {
   font-size: 15px;
 }
+
+.eye-icon{
+  margin-top: 10px;
+  color: #313131;
+  cursor: pointer;
+}
+
+.modal-main{
+  display:flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+
+}
+
+.logout-btn{
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}

@@ -12,7 +12,8 @@ export default function Login() {
   let navigate=useNavigate();
   const login=()=>{
     signInWithEmailAndPassword(auth, loginData.email, loginData.password)
-    .then(()=>{
+    .then((response)=>{
+      localStorage.setItem('userEmail', response.user.email)
       navigate('/home')
     })
     .catch(err=>{

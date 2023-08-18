@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
-import { 
+import {
     createUserWithEmailAndPassword,
     getAuth
 } from 'firebase/auth'
@@ -13,34 +13,31 @@ export default function Register({
     const collectionRef = collection(database, 'userPasswords')
     const auth = getAuth();
     const onInput = (event) => {
-        let data = {[event.target.name]: event.target.value}
-        setRegisterData({...registerData, ...data})
+        let data = { [event.target.name]: event.target.value }
+        setRegisterData({ ...registerData, ...data })
     }
 
-    const register = ()=>{
+    const register = () => {
         createUserWithEmailAndPassword(auth, registerData.email, registerData.password)
-        .then(response =>{
-            sessionStorage.setItem('userEmail', response.user.email)
-            addDoc(collectionRef, {
-                email:registerData.email,
-                password:registerData.password,
-                passwordsArray:[{
-                    name:'',
-                    password:''
-                }]
+            .then(response => {
+                sessionStorage.setItem('userEmail', response.user.email)
+                addDoc(collectionRef, {
+                    email: registerData.email,
+                    password: registerData.password,
+                    passwordsArray: []
+                })
+                    .then(() => {
+                        alert('You are now successfully registered!')
+                    })
+                    .catch(err => {
+                        alert(err.message)
+                    })
             })
-            .then(()=>{
-                alert('You are now successfully registered!')
+            .catch(error => {
+                alert(error.message)
             })
-            .catch(err=>{
-                alert(err.message)
-            })
-        })
-        .catch(error=>{
-            alert(error.message)
-        })
     }
-    
+
     return (
         <div className='register-main'>
             <h1>Register</h1>
@@ -63,7 +60,7 @@ export default function Register({
                     />
 
                     <button className='input-btn'
-                    onClick={register}
+                        onClick={register}
                     >
                         Sign Up
                     </button>
