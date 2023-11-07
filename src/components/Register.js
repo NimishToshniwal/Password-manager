@@ -5,6 +5,7 @@ import {
     createUserWithEmailAndPassword,
     getAuth
 } from 'firebase/auth'
+import { Link } from 'react-router-dom';
 
 export default function Register({
     database
@@ -52,6 +53,11 @@ export default function Register({
                         name='email'
                     />
                     <input
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                                register()
+                            }
+                        }}
                         placeholder='Enter your Password'
                         className='input-fields'
                         onChange={onInput}
@@ -64,6 +70,7 @@ export default function Register({
                     >
                         Sign Up
                     </button>
+                    <Link to={'/'} className='input-btn' style={{textDecoration:'None'}}>LogIn</Link>
                 </div>
             </div>
         </div>
